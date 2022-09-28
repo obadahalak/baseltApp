@@ -27,8 +27,6 @@ class SiteinfoFactory extends Factory
                     'name' => 'OfficeSectionName',
                     'lan' => '222',
                     'lat' => '333'
-
-
             ]
         ];
         $links=[
@@ -41,11 +39,11 @@ class SiteinfoFactory extends Factory
 
 
         return [
-            'office' => json_encode($office),
+            'office' => $office,
             'phone' => '12312333',
             'fax' => '123123',
             'email' => fake()->email(),
-            'links'=>json_encode($links),
+            'links'=>$links,
             'about_us'=>fake()->text(300),
         ];
     }

@@ -21,6 +21,7 @@ Route::controller(ContactSupportController::class)->middleware('auth:admin')->gr
 Route::controller(SiteInfoEditController::class)->middleware('auth:admin')->group(function(){
 
     Route::get('siteInfo','siteInfo')->name('siteInfo');
+    Route::post('updateSiteInfo','updateSiteInfo')->name('updateSiteInfo');
 });
 
 //siteInfo
