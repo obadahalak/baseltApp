@@ -323,8 +323,11 @@
         accessToken: mapboxgl.accessToken,
         mapboxgl: mapboxgl
     });
-    
 
     document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+    geocoder.on('result', e => {
+  console.log(e.result.center)
+})
+    //console.log(geocoder._lngLat);
 </script>
 @endsection
