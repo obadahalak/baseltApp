@@ -29,6 +29,7 @@ class SitInfoRequest extends FormRequest
             'phone' => 'required',
             'about_us' => 'required',
 
+
         ];
     }
 }

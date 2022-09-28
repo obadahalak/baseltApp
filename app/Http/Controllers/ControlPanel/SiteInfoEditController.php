@@ -44,6 +44,7 @@ class SiteInfoEditController extends Controller
                 'office' => $office
             ]
         );
+        dd($request->lat);
         return redirect()->back()->with('success', 'تم تعديل البيانات بنجاح');
     }
 }

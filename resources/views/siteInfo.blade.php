@@ -218,6 +218,7 @@
 
                                     <div class="input-group mb-3">
                                         <button type="submit" class="btn btn-success">Save</button>
+                                        <input type="text" name="" id="location">
                                     </div>
 
 
@@ -299,6 +300,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
+
             </div>
         </div>
     </div>
@@ -326,8 +328,15 @@
 
     document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
     geocoder.on('result', e => {
-  console.log(e.result.center)
-})
-    //console.log(geocoder._lngLat);
+
+        console.log(e.result.center);
+        $('#location').val(e.result.center);
+    })
+
 </script>
+
+
+
 @endsection
+
+        </script>
