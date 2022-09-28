@@ -1,18 +1,27 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ControlPanel\AuthController;
+use App\Http\Controllers\ControlPanel\ContactSupportController;
+use App\Http\Controllers\ControlPanel\SiteInfoEditController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::controller(AuthController::class)->group(function(){
 
-Route::get('/', function () {
-    return view('welcome');
+    Route::get('/','login')->middleware('guest');
+    Route::post('authAdmin','authAdmin')->name('authAdmin');
+    Route::get('dashboard','dashboard')->name('dashboard')->middleware('auth:admin');
+
 });
+
+Route::controller(ContactSupportController::class)->middleware('auth:admin')->group(function(){
+
+    Route::get('contactSupport','contactSupportMessage')->name('contactSupport');
+});
+
+Route::controller(SiteInfoEditController::class)->middleware('auth:admin')->group(function(){
+
+    Route::get('siteInfo','siteInfo')->name('siteInfo');
+});
+
+//siteInfo
+
