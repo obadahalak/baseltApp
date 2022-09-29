@@ -20,7 +20,8 @@ class SliderImagesController extends Controller
 
     public function  UploadSlider(Request $request){
 
-        return $this->UploadSlider(TypesOfslider::home);
+
+        return $this->UploadSlider(TypesOfslider::Home);
         // $rule=[];
 
         // $validator=Validator::make($request->all(),$rule);

@@ -8,7 +8,7 @@ use App\Http\Helper\TypesOfslider;
 trait  UploadSlider {
 
 
-    public function UploadSlider(TypesOfslider $type){
+    public function UploadSlider( $type){
 
         dd($type);
         // $images->store($type.'/sliderImages','public');
