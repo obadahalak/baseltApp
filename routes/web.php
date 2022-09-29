@@ -29,7 +29,7 @@ Route::controller(SiteInfoEditController::class)->middleware('auth:admin')->grou
 
 Route::controller(SliderImagesController::class)->group(function(){
 
-    Route::get('/test','UploadSlider');
+    Route::get('/test/{type}','UploadSlider');
 
 
 });
