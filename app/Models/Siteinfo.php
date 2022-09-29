@@ -21,7 +21,16 @@ class Siteinfo extends Model
         );
     }
 
+
+
     public function office(): Attribute
+    {
+        return new Attribute(
+            get: fn ($value) => json_decode($value),
+            set: fn ($value) => json_encode($value),
+        );
+    }
+    public function officeAr(): Attribute
     {
         return new Attribute(
             get: fn ($value) => json_decode($value),

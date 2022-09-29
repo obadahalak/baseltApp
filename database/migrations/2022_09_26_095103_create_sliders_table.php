@@ -15,7 +15,10 @@ return new class extends Migration
     {
         Schema::create('sliders', function (Blueprint $table) {
             $table->id();
-            $table->enum('slidertype',['home','page1Header','page2body','page3footter']); ///exsist another home 3 type;
+            $table->enum('slidertype',
+                ['home','page1Header','page1Title','page1body','page1footter',
+                        'page2Title','page2Header','page2body','page2footter']
+            ); ///exsist another home 3 type;
             $table->string('src');
             $table->timestamps();
         });

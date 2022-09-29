@@ -7,6 +7,7 @@ use App\Http\Requests\SitInfoRequest;
 use App\Models\Siteinfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class SiteInfoEditController extends Controller
 {
@@ -23,8 +24,15 @@ class SiteInfoEditController extends Controller
         return view('siteInfo', compact('data', 'links', 'officeMain', 'officeSection'));
     }
 
+    public function  getLocation($location){
+        $long= Str::before($location,',');
+        $lat= Str::after($location,',');
+         return  $locationMain=[$long,$lat];
+    }
     public function updateSiteInfo(SitInfoRequest $request)
     {
+
+
         $siteinfo = Siteinfo::first();
 
         $links = $siteinfo['links'];
@@ -35,8 +43,16 @@ class SiteInfoEditController extends Controller
 
 
         $office = $siteinfo['office'];
+
         $office->mainOffice->name = $request->mainOfficeName;
+
+        $office->mainOffice->long =  $this->getLocation($request->location)[0];;
+        $office->mainOffice->lat =   $this->getLocation($request->location)[1];
+
         $office->sectionOffice->name = $request->officeSection;
+
+        $office->sectionOffice->long = $this->getLocation($request->locationSection)[0];
+        $office->sectionOffice->lat = $this->getLocation($request->locationSection)[1];
 
         $siteinfo->update(
             $request->validated() + [
@@ -44,7 +60,7 @@ class SiteInfoEditController extends Controller
                 'office' => $office
             ]
         );
-        dd($request->lat);
+
         return redirect()->back()->with('success', 'تم تعديل البيانات بنجاح');
     }
 }

@@ -32,6 +32,14 @@
 <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css"
     type="text/css">
 <style>
+    .geocoderSection{
+        position: absolute;
+        z-index: 1;
+        width: 50%;
+        left: 50%;
+        margin-left: -25%;
+        top: 10px;
+    }
     .geocoder {
         position: absolute;
         z-index: 1;
@@ -48,8 +56,39 @@
     #map {
         margin-top: 0px;
     }
+
+    #mapSection {
+        margin-top: 0px;
+    }
 </style>
 <!-- breadcrumb -->
+
+<!-- Modal -->
+<div class="modal fade" id="section" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">select section  location</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>asd</p>
+                <div id="mapSection"></div>
+
+                <div id="geocoderSection" class="geocoder"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="seaveSectionLocation"class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="page-title">
     <div class="row">
         <div class="col-sm-6">
@@ -205,7 +244,7 @@
 
                                     <label for="">Update location section Office</label>
                                     <div class="input-group mb-3">
-                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        <button type="button" id="locationSs" class="btn btn-primary" data-toggle="modal"
                                             data-target="#section">
                                             select location for section office
                                         </button>
@@ -218,7 +257,9 @@
 
                                     <div class="input-group mb-3">
                                         <button type="submit" class="btn btn-success">Save</button>
-                                        <input type="text" name="" id="location">
+                                        <input type="hidden" name="location" id="location">
+                                        <input type="hidden" name="locationSection" id="locationSection">
+
                                     </div>
 
 
@@ -256,19 +297,17 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">select location </h5>
+                <h5 class="modal-title" id="exampleModalLabel">select main location </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-12" style="post">
+                <div class="modal-body">
 
-                        <div id="map"></div>
+                    <div id="map"></div>
 
-                        <div id="geocoder" class="geocoder"></div>
-                    </div>
+                    <div id="geocoder" class="geocoder"></div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -281,31 +320,7 @@
 
 
 
-<!-- Modal -->
-<div class="modal fade" id="section" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">select location</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div id="map"></div>
-
-                <div id="geocoder" class="geocoder"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-
-            </div>
-        </div>
-    </div>
-</div>
-<!-- row closed -->
+<<!-- row closed -->
 @endsection
 @section('js')
 
@@ -333,6 +348,39 @@
         $('#location').val(e.result.center);
     })
 
+
+
+</script>
+
+<script>
+    $( document ).ready(function() {
+
+        $( "#locationSs" ).on('click',function() {
+
+            mapboxgl.accessToken =
+                'pk.eyJ1Ijoib2JhZGFoYWxsYWsiLCJhIjoiY2wzYjJsZ2ZkMDNqZjNrcW5hYjAwMTA1YSJ9.LuE8p0KasMJk6Kl-sFKLJg';
+            const mapSection = new mapboxgl.Map({
+                container: 'mapSection',
+                // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+                style: 'mapbox://styles/mapbox/streets-v11',
+                center: [-79.4512, 43.6568],
+                zoom: 13
+            });
+
+            // Add the control to the map.
+            const geocoder = new MapboxGeocoder({
+                accessToken: mapboxgl.accessToken,
+                mapboxgl: mapboxgl
+            });
+
+            document.getElementById('geocoderSection').appendChild(geocoder.onAdd(mapSection));
+            geocoder.on('result', e => {
+
+                console.log(e.result.center);
+                $('#locationSection').val(e.result.center);
+           })
+        });
+    });
 </script>
 
 

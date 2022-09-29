@@ -16,11 +16,13 @@ return new class extends Migration
         Schema::create('siteinfos', function (Blueprint $table) {
             $table->id();
             $table->json('office');/// tow office first('mainOffice' => place : value , map : value, ,'SectionOffice' => place :vlaue , map :value)
+            $table->json('office_ar');/// tow office first('mainOffice' => place : value , map : value, ,'SectionOffice' => place :vlaue , map :value)
             $table->string('phone');
             $table->string('fax');
             $table->string('email');
             $table->json('links');  /// linksValueFor(facebook ,instagram , youtube )
             $table->longText('about_us');
+            $table->longText('about_us_ar');
             $table->timestamps();
         });
     }

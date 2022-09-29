@@ -7,7 +7,7 @@ use App\Http\Controllers\ControlPanel\SiteInfoEditController;
 
 Route::controller(AuthController::class)->group(function(){
 
-    Route::get('/','login')->middleware('guest');
+    Route::get('/','login')->middleware('guest')->name('login');
     Route::post('authAdmin','authAdmin')->name('authAdmin');
     Route::get('dashboard','dashboard')->name('dashboard')->middleware('auth:admin');
 
@@ -23,6 +23,4 @@ Route::controller(SiteInfoEditController::class)->middleware('auth:admin')->grou
     Route::get('siteInfo','siteInfo')->name('siteInfo');
     Route::post('updateSiteInfo','updateSiteInfo')->name('updateSiteInfo');
 });
-
-//siteInfo
 

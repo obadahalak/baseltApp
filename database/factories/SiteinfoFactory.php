@@ -20,13 +20,27 @@ class SiteinfoFactory extends Factory
 
                 'mainOffice' => [
                     'name' => 'OfficeMainName',
-                    'lan' => '222',
+                    'long' => '222',
                     'lat' => '333'
                 ],
                 'sectionOffice' => [
                     'name' => 'OfficeSectionName',
-                    'lan' => '222',
+                    'long' => '222',
                     'lat' => '333'
+            ]
+        ];
+
+        $office_ar = [
+
+            'mainOffice' => [
+                'name' => 'OfficeMainName',
+                'long' => '222',
+                'lat' => '333'
+            ],
+            'sectionOffice' => [
+                'name' => 'OfficeSectionName',
+                'long' => '222',
+                'lat' => '333'
             ]
         ];
         $links=[
@@ -37,14 +51,15 @@ class SiteinfoFactory extends Factory
 
         ];
 
-
         return [
             'office' => $office,
+            'office_ar' =>$office_ar,
             'phone' => '12312333',
             'fax' => '123123',
             'email' => fake()->email(),
             'links'=>$links,
             'about_us'=>fake()->text(300),
+            'about_us_ar'=>fake()->text(300),
         ];
     }
 }

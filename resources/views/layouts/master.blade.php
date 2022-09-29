@@ -18,6 +18,14 @@
             width: 100%;
 
         }
+
+        #mapSection {
+            position: initial;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+
+        }
     </style>
     @include('layouts.head')
 </head>
