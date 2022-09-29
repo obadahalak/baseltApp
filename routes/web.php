@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControlPanel\AuthController;
-use App\Http\Controllers\ControlPanel\ContactSupportController;
 use App\Http\Controllers\ControlPanel\SiteInfoEditController;
+use App\Http\Controllers\ControlPanel\SliderImagesController;
+use App\Http\Controllers\ControlPanel\ContactSupportController;
 
 Route::controller(AuthController::class)->group(function(){
 
@@ -22,5 +23,14 @@ Route::controller(SiteInfoEditController::class)->middleware('auth:admin')->grou
 
     Route::get('siteInfo','siteInfo')->name('siteInfo');
     Route::post('updateSiteInfo','updateSiteInfo')->name('updateSiteInfo');
+
+});
+
+
+Route::controller(SliderImagesController::class)->group(function(){
+
+    Route::get('/test','UploadSlider');
+
+
 });
 
