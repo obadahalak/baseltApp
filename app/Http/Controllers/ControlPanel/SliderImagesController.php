@@ -18,10 +18,15 @@ class SliderImagesController extends Controller
         return view('silders');
     }
 
-    public function  UploadSlider(Request $request){
+    public function  UploadSlider(TypesOfslider $type){
 
-
-        return $this->UploadSlider(TypesOfslider::Home);
+        try {
+            $this->UploadSliderImage($type);
+        }
+        catch (\Error $er){
+            return $er->getMessage();
+        }
+        return  $this->UploadSliderImage($type);
         // $rule=[];
 
         // $validator=Validator::make($request->all(),$rule);
